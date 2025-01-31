@@ -17,9 +17,14 @@ type CreateOpeningResponse struct {
 	Data    schemas.OpeningResponse `json:"data"`
 }
 
+type DeleteOpeningResponse struct {
+	Message string                  `json:"message"`
+	Data    schemas.OpeningResponse `json:"data"`
+}
+
 func sendError(ctx *gin.Context, code int, msg string) {
 	ctx.Header("Content-Type", "application/json")
-	ctx.JSON(500, gin.H{
+	ctx.JSON(code, gin.H{
 		"message":   msg,
 		"errorCode": code,
 	})
