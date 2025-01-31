@@ -10,7 +10,7 @@ import (
 
 // @Basepath api/v1
 // @Summary get opening
-// @Description get a new job opening
+// @Description get a job opening
 // @tags openings
 // @Accept json
 // @Produce json

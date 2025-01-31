@@ -42,6 +42,15 @@ definitions:
       message:
         type: string
     type: object
+  handler.GetOpeningsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.OpeningResponse'
+        type: array
+      message:
+        type: string
+    type: object
   schemas.OpeningResponse:
     properties:
       company:
@@ -69,6 +78,24 @@ info:
   contact: {}
 paths:
   /openings:
+    get:
+      consumes:
+      - application/json
+      description: get all the job openings
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetOpeningsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: get openings
+      tags:
+      - openings
     post:
       consumes:
       - application/json
@@ -102,7 +129,7 @@ paths:
     delete:
       consumes:
       - application/json
-      description: delete a new job opening
+      description: delete a job opening
       parameters:
       - description: Opening identification
         in: path
@@ -134,7 +161,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: get a new job opening
+      description: get a job opening
       parameters:
       - description: Opening identification
         in: path

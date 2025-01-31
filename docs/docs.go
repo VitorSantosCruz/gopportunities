@@ -16,6 +16,33 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/openings": {
+            "get": {
+                "description": "get all the job openings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "openings"
+                ],
+                "summary": "get openings",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.GetOpeningsResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "create a new job opening",
                 "consumes": [
@@ -63,7 +90,7 @@ const docTemplate = `{
         },
         "/openings/{id}": {
             "get": {
-                "description": "get a new job opening",
+                "description": "get a job opening",
                 "consumes": [
                     "application/json"
                 ],
@@ -105,7 +132,7 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "delete a new job opening",
+                "description": "delete a job opening",
                 "consumes": [
                     "application/json"
                 ],
@@ -216,6 +243,20 @@ const docTemplate = `{
             "properties": {
                 "data": {
                     "$ref": "#/definitions/schemas.OpeningResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.GetOpeningsResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schemas.OpeningResponse"
+                    }
                 },
                 "message": {
                     "type": "string"
