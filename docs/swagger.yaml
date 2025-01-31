@@ -51,6 +51,28 @@ definitions:
       message:
         type: string
     type: object
+  handler.UpdateOpeningRequest:
+    properties:
+      company:
+        type: string
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: integer
+    type: object
+  handler.UpdateOpeningResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.OpeningResponse'
+      message:
+        type: string
+    type: object
   schemas.OpeningResponse:
     properties:
       company:
@@ -101,7 +123,7 @@ paths:
       - application/json
       description: create a new job opening
       parameters:
-      - description: Request  body
+      - description: Request body
         in: body
         name: request
         required: true
@@ -184,6 +206,44 @@ paths:
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
       summary: get opening
+      tags:
+      - openings
+    put:
+      consumes:
+      - application/json
+      description: update a job opening
+      parameters:
+      - description: Opening identification
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateOpeningRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.UpdateOpeningResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: update opening
       tags:
       - openings
 swagger: "2.0"

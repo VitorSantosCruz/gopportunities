@@ -13,7 +13,7 @@ import (
 // @tags openings
 // @Accept json
 // @Produce json
-// @Param request  body CreateOpeningRequest true "Request  body"
+// @Param request body CreateOpeningRequest true "Request body"
 // @Success 201 {object} CreateOpeningResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse

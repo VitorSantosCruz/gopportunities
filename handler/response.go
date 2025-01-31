@@ -12,14 +12,9 @@ type ErrorResponse struct {
 	ErrorCode string `json:"errorCode "`
 }
 
-type CreateOpeningResponse struct {
+type GetOpeningsResponse struct {
 	Message string                  `json:"message"`
-	Data    schemas.OpeningResponse `json:"data"`
-}
-
-type DeleteOpeningResponse struct {
-	Message string                  `json:"message"`
-	Data    schemas.OpeningResponse `json:"data"`
+	Data    []schemas.OpeningResponse `json:"data"`
 }
 
 type GetOpeningResponse struct {
@@ -27,9 +22,19 @@ type GetOpeningResponse struct {
 	Data    schemas.OpeningResponse `json:"data"`
 }
 
-type GetOpeningsResponse struct {
+type CreateOpeningResponse struct {
 	Message string                  `json:"message"`
-	Data    []schemas.OpeningResponse `json:"data"`
+	Data    schemas.OpeningResponse `json:"data"`
+}
+
+type UpdateOpeningResponse struct {
+	Message string                  `json:"message"`
+	Data    schemas.OpeningResponse `json:"data"`
+}
+
+type DeleteOpeningResponse struct {
+	Message string                  `json:"message"`
+	Data    schemas.OpeningResponse `json:"data"`
 }
 
 func sendError(ctx *gin.Context, code int, msg string) {
