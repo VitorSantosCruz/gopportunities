@@ -7,10 +7,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// @Basepath api/v1
+// @Summary create opening
+// @Description create a new job opening
+// @tags openings
+// @Accept json
+// @Produce json
+// @Param request  body CreateOpeningRequest true "Request  body"
+// @Success 201 {object} CreateOpeningResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /openings [post]
 func CreateOpeningHandler(ctx *gin.Context) {
 	request := CreateOpeningRequest{}
 	ctx.BindJSON(&request)
- 
+
 	if err := request.Validate(); err != nil {
 		logger.Errorf("Error validating request: %v", err.Error())
 		sendError(ctx, http.StatusBadRequest, err.Error())
@@ -28,7 +39,7 @@ func CreateOpeningHandler(ctx *gin.Context) {
 
 	if err := db.Create(&opening).Error; err != nil {
 		logger.Errorf("Error creating opening: %v", err)
-		sendError(ctx, http.StatusInternalServerError , "error creating opening in database")
+		sendError(ctx, http.StatusInternalServerError, "error creating opening in database")
 		return
 	}
 
